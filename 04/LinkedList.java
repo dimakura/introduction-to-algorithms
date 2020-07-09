@@ -34,9 +34,10 @@ public class LinkedList<K extends Comparable<K>> {
         if (element.key.compareTo(key) == 0) {
           parent.next = element.next;
           break;
+        } else {
+          parent = element;
+          element = parent.next;
         }
-        parent = element;
-        element = parent.next;
       }
 
       return this;
@@ -45,7 +46,17 @@ public class LinkedList<K extends Comparable<K>> {
 
   // Exercise 4.2
   LinkedList<K> reverse() {
-    // TODO:
-    return this;
+    var reversed = this;
+    var element = this.next;
+    reversed.next = null;
+
+    while (element != null) {
+      var next = element.next;
+      element.next = reversed;
+      reversed = element;
+      element = next;
+    }
+
+    return reversed;
   }
 }
