@@ -1,3 +1,5 @@
+// $ javac LinkedList.java Exercise_4_03.java
+// $ java Exercise_4_03
 public class BinarySearchTree<K extends Comparable<K>> {
   private K key;
   private BinarySearchTree<K> left;
@@ -31,6 +33,22 @@ public class BinarySearchTree<K extends Comparable<K>> {
 
   LinkedList<K> orderedList() {
     return orderedList(this).first;
+  }
+
+  K search(K key) {
+    var tree = this;
+    while (tree != null) {
+      int compare = key.compareTo(tree.key);
+      if (compare == 0) {
+        return key; // found!
+      } else if (compare < 0) {
+        tree = tree.left;
+      } else {
+        tree = tree.right;
+      }
+    }
+
+    return null; // not found!
   }
 
   private Pair<LinkedList<K>> orderedList(BinarySearchTree<K> tree) {
