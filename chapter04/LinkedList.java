@@ -7,10 +7,13 @@ public class LinkedList<K extends Comparable<K>> {
   }
 
   LinkedList<K> append(K key) {
-    var list = this;
-    while (list.next != null)
-      list = list.next;
-    return list.next = new LinkedList<>(key);
+    var end = findEnd();
+    return end.next = new LinkedList<>(key);
+  }
+
+  LinkedList<K> append(LinkedList<K> list) {
+    var end = findEnd();
+    return end.next = list;
   }
 
   void print() {
@@ -23,7 +26,16 @@ public class LinkedList<K extends Comparable<K>> {
     System.out.println();
   }
 
-  // Exercise 4.1
+  int length() {
+    var len = 1;
+    var list = this;
+    while (list.next != null) {
+      list = list.next;
+      len++;
+    }
+    return len;
+  }
+
   LinkedList<K> delete(K key) {
     if (key.compareTo(this.key) == 0) {
       return next;
@@ -44,7 +56,6 @@ public class LinkedList<K extends Comparable<K>> {
     }
   }
 
-  // Exercise 4.2
   LinkedList<K> reverse() {
     var reversed = this;
     var element = this.next;
@@ -58,5 +69,12 @@ public class LinkedList<K extends Comparable<K>> {
     }
 
     return reversed;
+  }
+
+  private LinkedList<K> findEnd() {
+    var list = this;
+    while (list.next != null)
+      list = list.next;
+    return list;
   }
 }
