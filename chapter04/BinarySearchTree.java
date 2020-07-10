@@ -57,7 +57,7 @@ public class BinarySearchTree<K extends Comparable<K>> {
     return new Pair<>(head, end);
   }
 
-  static class Pair<T> {
+  private class Pair<T> {
     T first;
     T second;
 
